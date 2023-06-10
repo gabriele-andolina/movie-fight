@@ -1,6 +1,6 @@
-const fetchData = async () => {
+const fetchData = async (searchTerm) => {
     const response = await fetch(
-        "http://www.omdbapi.com/?apikey=1d75e9fb&s=avengers"
+        `http://www.omdbapi.com/?apikey=1d75e9fb&s=${searchTerm}`
     )
         .then((res) => res.json())
         .then((data) => console.log(data));
@@ -8,4 +8,7 @@ const fetchData = async () => {
     return response;
 };
 
-fetchData();
+const input = document.querySelector("input");
+input.addEventListener("input", (event) => {
+    fetchData(event.target.value);
+});
