@@ -4,10 +4,17 @@ const fetchData = async (searchTerm) => {
     )
         .then((res) => res.json())
         .then((data) => {
+            if (data.Error) {
+                console.log(data.Error);
+                return [];
+            }
             return data.Search;
+        })
+        .catch((error) => {
+            console.log(error);
         });
 
-    console.log(response);
+    // console.log(response);
     return response;
 };
 
