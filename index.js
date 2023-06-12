@@ -76,5 +76,27 @@ const onMovieSelect = async (movie) => {
         `http://www.omdbapi.com/?apikey=1d75e9fb&i=${movie.imdbID}`
     )
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            console.log(data);
+            document.querySelector("#summary").innerHTML = movieTemplate(data);
+        });
+};
+
+const movieTemplate = (movieDetails) => {
+    return `
+    <article class="media">
+        <figure class="media-left">
+            <p class="image">
+                <img src="${movieDetails.Poster}">
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+                <h1>${movieDetails.Title}</h1>
+                <h4>${movieDetails.Genre}</h4>
+                <p>${movieDetails.Plot}</p>
+            </div>
+        </div>
+    </article>
+    `;
 };
