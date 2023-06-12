@@ -42,10 +42,11 @@ const onInput = async (event) => {
 
     for (let movie of movies) {
         const option = document.createElement("a");
+        const imgSource = movie.Poster === "N/A" ? "" : movie.Poster;
 
         option.classList.add("dropdown-item");
         option.innerHTML = `
-            <img src="${movie.Poster}" />
+            <img src="${imgSource}" />
             ${movie.Title}
         `;
 
