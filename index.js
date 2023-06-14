@@ -1,23 +1,3 @@
-const fetchData = async (searchTerm) => {
-    const response = await fetch(
-        `http://www.omdbapi.com/?apikey=1d75e9fb&s=${searchTerm}`
-    )
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.Error) {
-                console.log(data.Error);
-                return [];
-            }
-            return data.Search;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-
-    console.log(response);
-    return response;
-};
-
 createAutoComplete({
     root: document.querySelector(".autocomplete"),
     renderOption(movie) {
@@ -32,6 +12,25 @@ createAutoComplete({
     },
     inputValue(movie) {
         return movie.Title;
+    },
+    async fetchData(searchTerm) {
+        const response = await fetch(
+            `http://www.omdbapi.com/?apikey=1d75e9fb&s=${searchTerm}`
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.Error) {
+                    console.log(data.Error);
+                    return [];
+                }
+                return data.Search;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        console.log(response);
+        return response;
     },
 });
 
